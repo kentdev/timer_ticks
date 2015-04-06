@@ -1,6 +1,6 @@
 #include "timer_ticks.h"
 
-volatile uint64_t timer_ticks = 0;  // number of timer0 interrupts since power-on
+volatile uint64_t timer_ticks = 0;  // number of timer0 interrupts since either power-on or the last call to clear_timer()
 
 ISR (TIMER0_COMPA_vect)
 {
