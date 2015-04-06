@@ -1,6 +1,8 @@
 #ifndef TIMER_TICKS_H_
 #define TIMER_TICKS_H_
 
+#include <avr/io.h>
+
 // the timing resolution can go down to a couple dozen microseconds if you need it to, though
 // you'll probably have to change the prescaler from /64 to /8
 
