@@ -1,7 +1,5 @@
 #include "timer_ticks.h"
 
-// Use timer0 to check for communication timeouts
-
 volatile uint64_t timer_ticks = 0;  // number of timer0 interrupts since power-on
 
 ISR (TIMER0_COMPA_vect)
