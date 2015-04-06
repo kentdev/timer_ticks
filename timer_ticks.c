@@ -1,4 +1,4 @@
-#include "main.h"
+#include "timer_ticks.h"
 
 // Use timer0 to check for communication timeouts
 
