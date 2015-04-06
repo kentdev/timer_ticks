@@ -12,7 +12,24 @@ ISR (TIMER0_COMPA_vect)
 void init_timer (void)
 {
 	TCCR0A = (1 << WGM01);  // CTC mode (TOP = OCR0A), OC0A pin disconnected
-	TCCR0B = (1 << CS01) | (1 << CS00);  // use /64 prescaling
+	
+	#if PRESCALER == 1
+		TCCR0B = (1 << CS00);  // use /1 prescaling
+	#elif PRESCALER == 8
+		TCCR0B = (1 << CS01);  // use /8 prescaling
+	#elif PRESCALER == 64
+		TCCR0B = (1 << CS01) | (1 << CS00);  // use /64 prescaling
+	#elif PRESCALER == 256
+		TCCR0B = (1 << CS02);  // use /256 prescaling
+	#elif PRESCALER == 1024
+		TCCR0B = (1 << CS02) | (1 << CS00);  // use /1024 prescaling
+	#else
+		#define STRINGIFY(s) XSTRINGIFY(s)
+		#define XSTRINGIFY(s) #s
+		#pragma message ("Unknown prescaler value " STRINGIFY(PRESCALER))
+		#error Unknown prescaler value
+	#endif
+	
 	TIMSK0 = (1 << OCIE0A);  // enable timer 0 compare match A interrupt
 	
 	// generate an interrupt every (F_CPU / 1000000 / 64) * US_PER_TIMER_TICK microseconds
