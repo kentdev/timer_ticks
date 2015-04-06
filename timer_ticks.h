@@ -1,7 +1,10 @@
 #ifndef TIMER_TICKS_H_
 #define TIMER_TICKS_H_
 
-// give our timer code 2ms resolution, since we're currently only using it to send data every 100ms:
+// the timing resolution can go down to a couple dozen microseconds if you need it to, though
+// you'll probably have to change the prescaler from /64 to /8
+
+// give our timer code 2ms resolution as a default
 #define US_PER_TIMER_TICK 2000
 #define CYCLES_PER_US (F_CPU / 1000000)
 
